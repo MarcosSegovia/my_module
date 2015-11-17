@@ -3,14 +3,14 @@ class my_module {
 
 	# HOSTS
 
-	host { 'localhost':
+	host { 'mysql':
 		ensure => 'present',
 		target => '/etc/hosts',
 		ip => '127.0.0.1',
 		host_aliases => ['mysql1']
 	}
 
-	host { 'localhost':
+	host { 'memcached':
 		ensure => 'present',
 		target => '/etc/hosts',
 		ip => '127.0.0.1',
