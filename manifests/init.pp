@@ -29,14 +29,11 @@ class my_module {
 
 	class { 'apache':  }
 
+    include apache::mod::php
+
 	apache::vhost { 'centos.dev':
 	  port    => '80',
 	  docroot => '/var/www',
-	}
-
-	apache::vhost { 'project1.dev':
-	  port    => '80',
-	  docroot => '/var/www/project1',
 	}
 
 	# MYSQL
@@ -82,7 +79,7 @@ class my_module {
 
 	# MEMCACHED
 
-	php::module { [ 'devel', 'pear', 'xml', 'mbstring', 'pecl-memcache', 'soap' ]: }
+	php::module { [ 'devel', 'pear', 'xml', 'mbstring', 'pecl-memcache', 'soap', 'pdo', 'pdo_mysql' ]: }
 
 	# EPEL repo
 
@@ -94,12 +91,6 @@ class my_module {
 	    ensure  => 'present',
 	    content => "<h1>HEY I'm in the base folder !</h1>",
 	    mode    => '0644',
-	}
-
-	file { '/var/www/project1/index.php':
-		ensure  => 'present',
-		content => "<h1>HEY I'm in the project1 folder !</h1>",
-		mode    => '0644',
 	}
 
 	# Ensure Time Zone and Region.
@@ -133,7 +124,7 @@ class my_module {
 		  ensure  => file,
 		  owner   => "root",
 		  group   => "root",
-		  mode    => 600,
+		  mode    => "600",
 		  replace => true,
 		  source  => "puppet:///modules/my_module/iptables.txt",
 		}
