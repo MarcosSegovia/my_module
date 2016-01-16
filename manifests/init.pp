@@ -25,6 +25,13 @@ class my_module {
 
 	package { $misc_packages: ensure => latest }
 
+	#COMPOSER
+
+	class { 'composer':
+	  command_name => 'composer',
+	  target_dir   => '/usr/local/bin'
+	}
+
 	# APACHE
 
 	class { 'apache':  }
